@@ -13,9 +13,13 @@
   padding: 8px;
 }
 
-#shared-table tr:nth-child(even){background-color: #e8e8e8;}
+#shared-table tr:nth-child(even){
+  background-color: #e8e8e8;
+}
 
-#shared-table tr:hover {background-color: #cfcece;}
+#shared-table tr:hover {
+  background-color: #cfcece;
+}
 
 #shared-table th {
   padding-top: 12px;
