@@ -40,7 +40,7 @@ const mockProductData = (): {
         <th>Product name</th>
         <th>ISBN</th>
         <th>Price</th>
-        <th>Departmen</th>
+        <th>Department</th>
         <th>Description</th>
       </tr>
       <tr v-for="product in mockProductData()" :key="product.id">
