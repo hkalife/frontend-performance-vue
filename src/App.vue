@@ -2,7 +2,7 @@
 import PeopleList from './components/PeopleList.vue';
 import ProductList from './components/ProductList.vue';
 
-const numberOfRowsToRender = 10;
+const numberOfRowsToRender = 5;
 </script>
 
 <template>

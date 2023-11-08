@@ -1,23 +1,56 @@
 <script setup lang="ts">
+import { defineProps } from 'vue';
+import { faker } from '@faker-js/faker';
+
+const props = defineProps<{
+  numberOfRowsToRender: number;
+}>();
+
+const mockProductData = (): {
+  id: string
+  productName: string
+  isbn: string
+  price: string
+  department: string
+  description: string
+}[] => {
+  const dataArray = []
+  
+  for (let i = 0; i < props.numberOfRowsToRender; i++) {
+    dataArray.push({
+      id: faker.database.mongodbObjectId(),
+      productName: faker.commerce.product(),
+      isbn: faker.commerce.isbn(),
+      price: faker.commerce.price(),
+      department: faker.commerce.department(),
+      description: faker.commerce.productDescription()
+    })
+  }
+
+  return dataArray
+}
 </script>
 
 <template>
   <div>
     <h3>Products</h3>
-    <table>
+    <table id="shared-table" align="center">
       <tr>
-        <th>Head 1</th>
-        <th>Head 2</th>
-        <th>Head 3</th>
+        <th>ID</th>
+        <th>Product name</th>
+        <th>ISBN</th>
+        <th>Price</th>
+        <th>Departmen</th>
+        <th>Description</th>
       </tr>
-      <tr>
-        <td>Body 1</td>
-        <td>Body 2</td>
-        <td>Body 3</td>
+      <tr v-for="product in mockProductData()" :key="product.id">
+        <td>{{ product.id }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.isbn }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.department }}</td>
+        <td>{{ product.description }}</td>
       </tr>
     </table>
   </div>
 </template>
-
-<style scoped>
-</style>

@@ -36,7 +36,7 @@ const mockPeopleData = (): {
 <template>
   <div>
     <h3>People</h3>
-    <table id="people-table" align="center">
+    <table id="shared-table" align="center">
       <tr>
         <th>ID</th>
         <th>Prefix</th>
@@ -56,28 +56,3 @@ const mockPeopleData = (): {
     </table>
   </div>
 </template>
-
-<style scoped>
-#people-table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#people-table td, #people-table th {
-  border: 1px solid #c1c0c0;
-  padding: 8px;
-}
-
-#people-table tr:nth-child(even){background-color: #e8e8e8;}
-
-#people-table tr:hover {background-color: #ffffff;}
-
-#people-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #089864;
-  color: white;
-}
-</style>
