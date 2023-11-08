@@ -1,23 +1,83 @@
 <script setup lang="ts">
+import { defineProps } from 'vue';
+import { faker } from '@faker-js/faker';
+import { format } from 'date-fns';
+
+const props = defineProps<{
+  numberOfRowsToRender: number;
+}>();
+
+const mockPeopleData = (): {
+  id: string
+  prefix: string
+  fullName: string
+  gender: string
+  jobArea: string
+  birthdate: string
+}[] => {
+  const dataArray = []
+  
+  for (let i = 0; i < props.numberOfRowsToRender; i++) {
+    const gender = faker.person.sexType();
+    dataArray.push({
+      id: faker.database.mongodbObjectId(),
+      prefix: faker.person.prefix(gender),
+      fullName: faker.person.fullName({ sex: gender }),
+      gender,
+      jobArea: faker.person.jobArea(),
+      birthdate: format(faker.date.birthdate(), 'dd/MM/yyyy')
+    })
+  }
+
+  return dataArray
+}
 </script>
 
 <template>
   <div>
     <h3>People</h3>
-    <table>
+    <table id="people-table" align="center">
       <tr>
-        <th>Head 1</th>
-        <th>Head 2</th>
-        <th>Head 3</th>
+        <th>ID</th>
+        <th>Prefix</th>
+        <th>Full name</th>
+        <th>Gender</th>
+        <th>Job Area</th>
+        <th>Birthdate</th>
       </tr>
-      <tr>
-        <td>Body 1</td>
-        <td>Body 2</td>
-        <td>Body 3</td>
+      <tr v-for="person in mockPeopleData()" :key="person.id">
+        <td>{{ person.id }}</td>
+        <td>{{ person.prefix }}</td>
+        <td>{{ person.fullName }}</td>
+        <td>{{ person.gender }}</td>
+        <td>{{ person.jobArea }}</td>
+        <td>{{ person.birthdate }}</td>
       </tr>
     </table>
   </div>
 </template>
 
 <style scoped>
+#people-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#people-table td, #people-table th {
+  border: 1px solid #c1c0c0;
+  padding: 8px;
+}
+
+#people-table tr:nth-child(even){background-color: #e8e8e8;}
+
+#people-table tr:hover {background-color: #ffffff;}
+
+#people-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #089864;
+  color: white;
+}
 </style>
